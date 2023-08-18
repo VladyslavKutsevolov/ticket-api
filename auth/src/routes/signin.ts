@@ -48,8 +48,6 @@ router.post(
       jwt: userJwt,
     };
 
-    console.log("req.session sign in", req.session);
-
     res.send({ user: match });
   }
 );
