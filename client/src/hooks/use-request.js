@@ -13,11 +13,14 @@ const useRequest = ({ url, method, body, onFail, onSuccess }) => {
 
       return res.data;
     } catch (e) {
-      console.log("FAIL", e);
+      console.log("FAILT USE REQ", e.data);
       if (e?.response && onFail) {
         const error = e.response.data.errors;
 
-        if (error[0].message === "Email in use") {
+        if (
+          error[0].message === "Email in use" ||
+          error[0].message === "Invalid credentials"
+        ) {
           return onFail({
             errors: [{ field: "email", message: "Email in use" }],
           });

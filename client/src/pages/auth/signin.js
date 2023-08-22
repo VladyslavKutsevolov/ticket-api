@@ -7,7 +7,7 @@ const Signup = () => {
   const [fieldErrors, setFieldErrors] = useState(null);
 
   const { doRequest } = useRequest({
-    url: "/api/users/signup",
+    url: "/api/users/signin",
     method: "post",
     body: credentials,
     onFail: (err) => setFieldErrors(err.errors),
@@ -41,7 +41,7 @@ const Signup = () => {
           alt="Your Company"
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Create an account
+          Sign in to your account
         </h2>
       </div>
 
@@ -114,10 +114,20 @@ const Signup = () => {
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Sign up
+              Sign in
             </button>
           </div>
         </form>
+
+        <p className="mt-10 text-center text-sm text-gray-500">
+          Not a member? &nbsp;
+          <a
+            href="/auth/signup"
+            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          >
+            Register here.
+          </a>
+        </p>
       </div>
     </div>
   );

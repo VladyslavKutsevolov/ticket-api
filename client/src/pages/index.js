@@ -1,9 +1,18 @@
-const Root = () => {
-  return (
-    <div>
-      <h1 className="text-red-800">React App!</h1>
-    </div>
+import buildClient from "../../api/build-context";
+
+const LandingPage = ({ currentUser }) => {
+  return currentUser ? (
+    <h1>You are sign in </h1>
+  ) : (
+    <h1>You are NOT sign in </h1>
   );
 };
 
-export default Root;
+LandingPage.getInitialProps = async (context) => {
+  const client = buildClient(context);
+  const { data } = await client.get("/api/users/currentuser");
+
+  return data;
+};
+
+export default LandingPage;
