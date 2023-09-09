@@ -21,14 +21,14 @@ build:
       docker:
         dockerfile: Dockerfile
       sync:
-          manual:
-          - src: 'src/**/*.js'
-            dest: .
+        manual:
+        - src: 'src/**/*.js'
+          dest: .
     - image: newtodoker/tickets
       context: tickets
       docker:
-          dockerfile: Dockerfile
+        dockerfile: Dockerfile
       sync:
-          manual:
-          - src: 'src/**/*.ts'
-            dest: .
+        manual:
+        - src: 'src/**/*.ts'
+          dest: .
