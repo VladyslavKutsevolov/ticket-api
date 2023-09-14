@@ -7,6 +7,8 @@ import {
   requireAuth,
   validateRequest,
 } from "@vticketing/common";
+import { TicketUpdatedPublisher } from "../events";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -39,6 +41,11 @@ router.put(
     });
 
     await ticket.save();
+
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      ...ticket,
+    });
 
     res.send(ticket);
   }

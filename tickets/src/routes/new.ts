@@ -2,6 +2,8 @@ import express, { Response, Request } from "express";
 import { requireAuth, validateRequest } from "@vticketing/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket";
+import { TicketCreatedPublisher } from "../events";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -25,6 +27,11 @@ router.post(
     });
 
     await ticket.save();
+
+    new TicketCreatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      ...ticket,
+    });
 
     res.status(201).send(ticket);
   }
